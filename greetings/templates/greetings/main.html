@@ -7,7 +7,7 @@
     </head>
 
     <body>
-        <h3>Hello {{ name|title }}!</h3>
+        <h3>Hello {{ name|title|default:"World" }}!</h3>
     </body>
 
 </html>
