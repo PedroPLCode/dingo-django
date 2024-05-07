@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
+<head>
+   <meta charset="UTF-8">
+   <title>{% block title %}Title{% endblock %}</title>
+</head>
 
-    <body>
-        <h3>Wynik operacji {{ a }} {{ operacja }} {{ b }}</h3>
-        <h2>Wynosi {{ wynik }}</h2>
-    </body>
+<body>
+    <div id="content">
+    <div id="header">
+        <h1>Dingo szablon glowny</h1>
+        <p>{{ title }}</p>
+    </div>
+    <div id="inner-content">
+        {% block content %}
+            To jest blok kodu. W innych szablonach możemy go nadpisać
+        {% endblock %}
+    </div>
+    </div>
+</body>
 
 </html>

@@ -1,0 +1,13 @@
+{% extends "maths/main.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% if wynik %}
+        <h3>Wynik operacji {{ a }} {{ operacja }} {{ b }}</h3>
+        <h2>Wynosi {{ wynik }}</h2>
+    {% else %}
+        <h3>Error. Nie dziel przez 0</h3>
+    {% endif %}
+
+{% endblock %}
