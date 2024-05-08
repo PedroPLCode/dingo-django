@@ -2,6 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from django.db import connection
 
 
 def main():
@@ -16,6 +17,9 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+    
+    # Zamknięcie połączenia z bazą danych
+    connection.close()
 
 
 if __name__ == '__main__':
