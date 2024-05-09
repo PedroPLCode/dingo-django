@@ -13,11 +13,7 @@ class Post(models.Model):
     )
     
     def __str__(self):
-        return (f"id:{self.id}\n"
-                f"title={self.title}\n"
-                f"content={self.content}\n"
-                f"created={self.created}\n"
-                f"modified={self.modified}\n")
+        return (f"id:{self.id} {self.title}")
 
 
 class Author(models.Model):
@@ -25,6 +21,4 @@ class Author(models.Model):
     email = models.EmailField(null=False, unique=True)
     
     def __str__(self):
-        return (f"id:{self.id}\n"
-                f"nick={self.nick}\n"
-                f"email={self.email}\n")
+        return (f"id:{self.id} {self.nick}")

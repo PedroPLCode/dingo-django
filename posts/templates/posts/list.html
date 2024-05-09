@@ -1,0 +1,22 @@
+{% extends "posts/main.html" %}
+
+{% block title %}Posts list{% endblock %}
+
+{% block content %}
+
+    <h3>Posts list</h3>
+
+    <ul>
+        {% for post in posts %}
+            <li><a href="{% url 'posts:details' post.id %}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add new Post</h2>
+    <form method="post" class="d-flex flex-column align-items-center justify-content-center">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="add post">
+    </form>
+
+{% endblock %}

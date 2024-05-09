@@ -1,0 +1,32 @@
+{% extends "posts/main.html" %}
+
+{% block title %}Posts list{% endblock %}
+
+{% block content %}
+
+    <h3>{{ author.nick }}</h3>
+
+    <table>
+        <tr>
+            <th>author.id</th>
+            <td>{{ author.id }}</td>
+        </tr>
+        <tr>
+            <th>author.nick</th>
+            <td>{{ author.nick }}</td>
+        </tr>
+        <tr>
+            <th>author.email</th>
+            <td>{{ author.email }}</td>
+        </tr>
+    </table>
+    <a href="{% url 'posts:authors' %}">back</a>
+
+    <h2>Edit Author</h2>
+    <form method="post" class="d-flex flex-column align-items-center justify-content-end">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">save changes</button>
+    </form>
+    
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "posts/main.html" %}
+
+{% block title %}Posts list{% endblock %}
+
+{% block content %}
+
+    <h3>{{ post.title }}</h3>
+
+    <table>
+        <tr>
+            <th>post.title</th>
+            <td>{{ post.title }}</td>
+        </tr>
+        <tr>
+            <th>post.content</th>
+            <td>{{ post.content }}</td>
+        </tr>
+        <tr>
+            <th>post.created:</th>
+            <td>{{ post.created }}</td>
+        </tr>
+        <tr>
+            <th>post.modified</th>
+            <td>{{ post.modified }}</td>
+        </tr>
+        <tr>
+            <th>post.author.id</th>
+            <td>{{ post.author.id }}</td>
+        </tr>
+        <tr>
+            <th>post.author.nick</th>
+            <td>{{ post.author.nick }}</td>
+        </tr>
+        <tr>
+            <th>post.author.email</th>
+            <td>{{ post.author.email }}</td>
+        </tr>
+    </table>
+
+    <a href="{% url 'posts:list' %}">back</a>
+
+    <h2>Edit Post</h2>
+    <form method="post" class="d-flex flex-column align-items-center justify-content-center">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="save changes">
+    </form>
+
+{% endblock %}

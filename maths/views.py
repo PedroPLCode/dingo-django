@@ -136,6 +136,6 @@ def results_list(request):
         template_name="maths/results.html",
         context={
             "results": results,
-            "form": form
+            "form": form,
         }
     )
