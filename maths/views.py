@@ -114,14 +114,8 @@ def results_list(request):
         form = ResultForm(data=request.POST)
 
         if form.is_valid():
-            if form.cleaned_data['error'] == '':
-                form.cleaned_data['error'] = None
-            Result.objects.get_or_create(**form.cleaned_data)
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "Utworzono nowy Result!!"
-            )
+            form.save()
+            messages.success(request, "Result added successfully")
         else:
             messages.add_message(
                 request,

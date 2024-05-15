@@ -8,12 +8,8 @@ def posts_list(request):
         form = PostForm(data=request.POST)
 
         if form.is_valid():
-            Post.objects.get_or_create(**form.cleaned_data)
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "Utworzono nowy post"
-            )
+            form.save()
+            messages.success(request, "Post added successfully")
         else:
             messages.add_message(
                 request,
@@ -39,6 +35,7 @@ def post_details(request, id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "Post changed successfully")
     else:
         form = PostForm(instance=post) 
 
@@ -82,6 +79,7 @@ def author_details(request, id):
         form = AuthorForm(request.POST, instance=author)
         if form.is_valid():
             form.save()
+            messages.success(request, "Author changed successfully")
     else:
         form = AuthorForm(instance=author) 
 
