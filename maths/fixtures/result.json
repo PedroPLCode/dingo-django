@@ -1,0 +1,162 @@
+[
+{
+    "model": "maths.result",
+    "pk": 1,
+    "fields": {
+        "value": null,
+        "error": "ZeroDivisionError"
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 2,
+    "fields": {
+        "value": 3.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 3,
+    "fields": {
+        "value": 0.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 4,
+    "fields": {
+        "value": 5.5,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 5,
+    "fields": {
+        "value": 55.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 6,
+    "fields": {
+        "value": null,
+        "error": "testowy error"
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 7,
+    "fields": {
+        "value": 323.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 8,
+    "fields": {
+        "value": null,
+        "error": "testowy"
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 9,
+    "fields": {
+        "value": 444.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 10,
+    "fields": {
+        "value": null,
+        "error": "test"
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 11,
+    "fields": {
+        "value": 33.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 12,
+    "fields": {
+        "value": 22.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 13,
+    "fields": {
+        "value": 1.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 14,
+    "fields": {
+        "value": 110.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 15,
+    "fields": {
+        "value": 500.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 16,
+    "fields": {
+        "value": 1.5,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 17,
+    "fields": {
+        "value": 8.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 18,
+    "fields": {
+        "value": 90.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 19,
+    "fields": {
+        "value": 6.0,
+        "error": null
+    }
+},
+{
+    "model": "maths.result",
+    "pk": 20,
+    "fields": {
+        "value": 50.0,
+        "error": null
+    }
+}
+]

@@ -1,0 +1,189 @@
+[
+{
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+        "title": "post 1",
+        "content": "tresc posta pierwszego",
+        "created": "2024-05-08T21:12:14.986Z",
+        "modified": "2024-05-08T21:12:14.986Z",
+        "author": 3
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+        "title": "post 2 zm",
+        "content": "tresc posta drugiego ZMIENIONA",
+        "created": "2024-05-08T21:12:48.338Z",
+        "modified": "2024-05-09T21:33:03.900Z",
+        "author": 10
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 3,
+    "fields": {
+        "title": "post 3",
+        "content": "tresc posta trzeciego",
+        "created": "2024-05-08T21:13:05.699Z",
+        "modified": "2024-05-08T21:13:05.699Z",
+        "author": 4
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 4,
+    "fields": {
+        "title": "post 4",
+        "content": "tresc posta czwartego",
+        "created": "2024-05-08T21:13:21.564Z",
+        "modified": "2024-05-08T21:13:21.565Z",
+        "author": 2
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 5,
+    "fields": {
+        "title": "post 5 zmiana",
+        "content": "tresc posta piatego zmiama",
+        "created": "2024-05-08T21:13:39.533Z",
+        "modified": "2024-05-09T21:23:05.867Z",
+        "author": 8
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 6,
+    "fields": {
+        "title": "post 6",
+        "content": "tresc posta szostego",
+        "created": "2024-05-08T21:13:54.211Z",
+        "modified": "2024-05-08T21:13:54.211Z",
+        "author": 2
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 7,
+    "fields": {
+        "title": "post 7",
+        "content": "tresc posta siodmego zmieniona",
+        "created": "2024-05-08T21:14:10.223Z",
+        "modified": "2024-05-09T18:56:49.018Z",
+        "author": 1
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 8,
+    "fields": {
+        "title": "post 8",
+        "content": "tresc posta osmego",
+        "created": "2024-05-08T21:14:22.886Z",
+        "modified": "2024-05-08T21:14:22.886Z",
+        "author": 1
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 9,
+    "fields": {
+        "title": "Temat zmiana",
+        "content": "tresc zmiana",
+        "created": "2024-05-09T19:44:51.328Z",
+        "modified": "2024-05-12T20:53:23.380Z",
+        "author": 8
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 10,
+    "fields": {
+        "title": "post z formularza",
+        "content": "lalallal tralalalala",
+        "created": "2024-05-09T20:36:17.465Z",
+        "modified": "2024-05-09T20:36:17.465Z",
+        "author": 2
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 11,
+    "fields": {
+        "title": "kolejny post z formularza",
+        "content": "tresc lalalalala",
+        "created": "2024-05-09T20:40:40.506Z",
+        "modified": "2024-05-09T20:40:40.506Z",
+        "author": 5
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 12,
+    "fields": {
+        "title": "nowy",
+        "content": "zmiana aaa",
+        "created": "2024-05-09T21:15:02.776Z",
+        "modified": "2024-05-09T21:24:04.049Z",
+        "author": 7
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 13,
+    "fields": {
+        "title": "sadsad",
+        "content": "sadsad",
+        "created": "2024-05-09T21:15:08.954Z",
+        "modified": "2024-05-09T21:15:08.954Z",
+        "author": 9
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 14,
+    "fields": {
+        "title": "cxvcxv",
+        "content": "dvcxv change",
+        "created": "2024-05-09T21:23:51.195Z",
+        "modified": "2024-05-15T16:48:34.012Z",
+        "author": 6
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 15,
+    "fields": {
+        "title": "jeszcze raz ZMIANA",
+        "content": "treaaeasfdsa dsad ssadsa sad sad sad sad sad sad sad sad sad sa dsad RRR",
+        "created": "2024-05-09T21:39:44.205Z",
+        "modified": "2024-05-09T21:40:59.671Z",
+        "author": 7
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 16,
+    "fields": {
+        "title": "asdsad",
+        "content": "sad",
+        "created": "2024-05-15T16:40:10.514Z",
+        "modified": "2024-05-15T16:40:10.514Z",
+        "author": 4
+    }
+},
+{
+    "model": "posts.post",
+    "pk": 17,
+    "fields": {
+        "title": "dsfdsfdsf",
+        "content": "dsfdsf",
+        "created": "2024-05-15T16:40:37.186Z",
+        "modified": "2024-05-15T16:40:37.186Z",
+        "author": 10
+    }
+}
+]
