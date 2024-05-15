@@ -1,28 +1,37 @@
 from django.test import TestCase, Client
-from maths.models import Math, Result
+from posts.models import Post, Author
         
-class MathViewsTest(TestCase):
+class PostsViewsTest(TestCase):
 
     def setUp(self):
-        Math.objects.create(operation="sub", a=20, b=30)
-        Result.objects.create(value=3.0, error=None)
+        Post.objects.create(title="test title 7", content="test content 7", author=1)
+        Author.objects.create(nick="test nick 1", email="test email 1")
         self.client = Client()
 
-    def test_maths_list(self):
-        response = self.client.get("/maths/histories/")
+    def test_posts_list(self):
+        response = self.client.get("/posts/list/")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["maths"]), 1)
-        self.assertIn('<li><a href="/maths/histories/1">id:1, a=20, b=30, op=sub</a></li>', response.content.decode())
+        self.assertEqual(len(response.context["posts"]), 1)
+        self.assertIn('<li><a href="/posts/details/1">test title 7</a></li>', response.content.decode())
 
-    def test_maths_details(self):
-        response = self.client.get("/maths/histories/1")
+    def test_post_details(self):
+        response = self.client.get("/posts/details/1")
         self.assertEqual(response.status_code, 200)
-        self.assertIn('<td>sub</td>', response.content.decode())
-        self.assertIn('<td>20</td>', response.content.decode())
-        self.assertIn('<td>30</td>', response.content.decode())
+        self.assertIn('<td>test title 7</td>', response.content.decode())
+        self.assertIn('<td>test content 7</td>', response.content.decode())
+        self.assertIn('<td>1</td>', response.content.decode())
+        self.assertIn('<td>test nick 1</td>', response.content.decode())
+        self.assertIn('<td>test email 1</td>', response.content.decode())        
 
-    def test_results_list(self):
-        response = self.client.get("/maths/results/")
+    def test_authors_list(self):
+        response = self.client.get("/posts/authors/")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["results"]), 1)
-        self.assertIn('<li>value: 3.0 | error: None</li>', response.content.decode())
+        self.assertEqual(len(response.context["authors"]), 1)
+        self.assertIn('<li><a href="/posts/authordetails/1">test nick 1</a></li>', response.content.decode())
+        
+    def test_author_details(self):
+        response = self.client.get("/posts/authordetails/1")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<td>1</td>', response.content.decode())
+        self.assertIn('<td>test nick 1</td>', response.content.decode())
+        self.assertIn('<td>test email 1</td>', response.content.decode())  
