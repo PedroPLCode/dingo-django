@@ -22,4 +22,4 @@ class TestUrls(TestCase):
 
    def test_arguments_should_be_integers_or_404(self):
        with self.assertRaises(Resolver404):
-           resolve('maths/sub/a/b')
+           resolve('/maths/sub/a/b')

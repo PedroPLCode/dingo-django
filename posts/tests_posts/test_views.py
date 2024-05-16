@@ -4,8 +4,9 @@ from posts.models import Post, Author
 class PostsViewsTest(TestCase):
 
     def setUp(self):
-        Post.objects.create(title="test title 7", content="test content 7", author=1)
-        Author.objects.create(nick="test nick 1", email="test email 1")
+        Author.objects.create(nick="test nick 1", email="test@email.com")
+        author = Author.objects.get(nick="test nick 1")
+        Post.objects.create(title="test title 7", content="test content 7", author=author)
         self.client = Client()
 
     def test_posts_list(self):
@@ -21,7 +22,7 @@ class PostsViewsTest(TestCase):
         self.assertIn('<td>test content 7</td>', response.content.decode())
         self.assertIn('<td>1</td>', response.content.decode())
         self.assertIn('<td>test nick 1</td>', response.content.decode())
-        self.assertIn('<td>test email 1</td>', response.content.decode())        
+        self.assertIn('<td>test@email.com</td>', response.content.decode())        
 
     def test_authors_list(self):
         response = self.client.get("/posts/authors/")
@@ -34,4 +35,4 @@ class PostsViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('<td>1</td>', response.content.decode())
         self.assertIn('<td>test nick 1</td>', response.content.decode())
-        self.assertIn('<td>test email 1</td>', response.content.decode())  
+        self.assertIn('<td>test@email.com</td>', response.content.decode())  
