@@ -4,19 +4,19 @@ from django.urls.exceptions import Resolver404
 from posts.views import posts_list, post_details, authors_list, author_details
 
 class TestUrls(TestCase):
-    def test_resolution_for_add(self):
-        resolver = resolve('/list')
+    def test_resolution_for_list(self):
+        resolver = resolve('/list/')
         self.assertEqual(resolver.func, posts_list)
 
-    def test_resolution_for_sub(self):
-        resolver = resolve('/details')
+    def test_resolution_for_details(self):
+        resolver = resolve('/details/1')
         self.assertEqual(resolver.func, post_details)
        
-    def test_resolution_for_mul(self):
-        resolver = resolve('/authors')
+    def test_resolution_for_authors(self):
+        resolver = resolve('/authors/')
         self.assertEqual(resolver.func, authors_list)
        
-    def test_resolution_for_div(self):
+    def test_resolution_for_authordetails(self):
         resolver = resolve('/authordetails/1')
         self.assertEqual(resolver.func, author_details)
 

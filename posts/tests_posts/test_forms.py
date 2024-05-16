@@ -3,9 +3,12 @@ from posts.models import Post, Author
 from posts.forms import PostForm, AuthorForm
 
 class PostFormTest(TestCase):
+    
+    def setUp(self):
+        Author.objects.create(nick="test nick 1", email="test email 1")
 
     def test_post_save_correct_data(self):
-        data = {"title": "test title", "content": "test content", "author": 3}
+        data = {"title": "test title", "content": "test content", "author": 1}
         self.assertEqual(len(Post.objects.all()), 0)
         form = PostForm(data=data)
         self.assertTrue(form.is_valid())
@@ -13,7 +16,7 @@ class PostFormTest(TestCase):
         self.assertIsInstance(p, Post)
         self.assertEqual(p.title, "test title")
         self.assertEqual(p.content, "test content")
-        self.assertEqual(p.author, 3)
+        self.assertEqual(p.author.id, 1)
         self.assertIsNotNone(p.id)
         self.assertIsNotNone(p.created)
         self.assertIsNotNone(p.modified)

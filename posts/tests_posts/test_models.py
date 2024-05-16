@@ -8,7 +8,7 @@ class PostModelTest(TestCase):
 
     def test_post_str(self):
         p = Post.objects.get(nick="test nick 1")
-        self.assertEqual(str(p), 'id: 1 & title: test title 7')
+        self.assertEqual(str(p), 'id:1 test title 7')
         
         
 class AuthorModelTest(TestCase):
@@ -18,4 +18,4 @@ class AuthorModelTest(TestCase):
 
     def test_author_str(self):
         a = Author.objects.get(nick="test nick 1")
-        self.assertEqual(str(a), 'id: 1 & nick: test nick 1')
+        self.assertEqual(str(a), 'id:1 test nick 1')
