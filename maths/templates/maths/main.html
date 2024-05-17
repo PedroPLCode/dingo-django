@@ -1,30 +1,40 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-   <meta charset="UTF-8">
-   <title>{% block title %} {{ title }} {% endblock %}</title>
-</head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title{% endblock %}</title>
+ 
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'maths/css/style.css' %}">
 
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+</head>
 <body>
-    <div id="content">
+<div id="content">
     <div id="header">
+        <img src="{% static 'maths/img/logo.svg' %}">
         <h1>Dingo szablon glowny</h1>
         <p>{{ title }}</p>
     </div>
+
     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
     {% endif %}
+
+    {% bootstrap_messages %}
     <div id="inner-content">
         {% block content %}
             To jest blok kodu. W innych szablonach możemy go nadpisać
         {% endblock %}
     </div>
-    </div>
+</div>
 </body>
-
 </html>
