@@ -3,10 +3,50 @@
 {% block title %}Maths list{% endblock %}
 
 {% block content %}
-   <ul>
-       {% for m in maths %}
-           {# <li><a href="/maths/histories/{{ m.id }}">{{ m }}</a></li> #}
-           <li><a href="{% url "maths:details" m.id %}">{{ m }}</a></li>
-       {% endfor %}
-   </ul>
+
+<form method="get" action="{% url 'maths:list' %}">
+    <label for="operation">Filter by operation:</label>
+    <select name="operation" id="operation">
+        <option value="">All</option>
+        <option value="add">Addition</option>
+        <option value="sub">Subtraction</option>
+        <option value="mul">Multiplication</option>
+        <option value="div">Division</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+
+    {% if operation_filter %}
+        <h4>Filtered by opetarion: {{ operation_filter }}</h4>
+    {% else %}
+        <h4>All results</h4>
+    {% endif %}
+
+    <ul>
+        {% for m in maths %}
+            <li><a href="{% url "maths:details" m.id %}">{{ m }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+    <span class="step-links">
+
+        {% if maths.has_previous %}
+            <a href="?page=1">« first</a>
+            <a href="?page={{ maths.previous_page_number }}">previous</a>
+        {% endif %}
+ 
+        <span class="current">
+            Page {{ maths.number }} of {{ maths.paginator.num_pages }}.
+        </span>
+ 
+        {% if maths.has_next %}
+            <a href="?page={{ maths.next_page_number }}">next</a>
+            <a href="?page={{ maths.paginator.num_pages }}">last »</a>
+        {% endif %}
+
+    </span>
+    </div>
+
 {% endblock %}

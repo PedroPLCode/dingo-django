@@ -8,6 +8,9 @@ OPERATION_CHOICES = (
 )
 
 class Math(models.Model):
+    class Meta:
+        ordering = ["-id"]
+       
     operation = models.CharField(max_length=5, choices=OPERATION_CHOICES)
     a = models.IntegerField()
     b = models.IntegerField()

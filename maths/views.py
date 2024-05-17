@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.contrib import messages
 from maths.models import Math, Result
@@ -92,12 +93,23 @@ def div(request, a, b):
     
 
 def maths_list(request):
-   maths = Math.objects.all()
-   return render(
-       request=request,
-       template_name="maths/list.html",
-       context={"maths": maths}
-   )
+    maths = Math.objects.all()
+    page_number = request.GET.get('page')
+    operation_filter = request.GET.get('operation')
+    
+    if operation_filter:
+        maths = Math.objects.filter(operation=operation_filter)
+        
+    paginator = Paginator(maths, 5)
+    maths = paginator.get_page(page_number)
+        
+    return render(
+        request=request,
+        template_name="maths/list.html",
+        context={"maths": maths,
+                 "operation_filter": operation_filter,
+                }
+    )
 
 
 def math_details(request, id):
