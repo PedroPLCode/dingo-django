@@ -23,11 +23,42 @@
         <h4>All results</h4>
     {% endif %}
 
-    <ul>
-        {% for m in maths %}
-            <li><a href="{% url "maths:details" m.id %}">{{ m }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="table-responsive">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#id</th>
+              <th scope="col">a</th>
+              <th scope="col">b</th>
+              <th scope="col">op</th>
+              <th scope="col">result</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if maths %}
+            {% for m in maths %}
+              <tr>
+                <th scope="row"><a href="{% url "maths:details" m.id %}">{{ m.id }}</a></th>
+                <td>{{ m.a }}</td>
+                <td>{{ m.b }}</td>
+                <td>{{ m.operation }}</td>
+                {% if m.result.value %}
+                <td>{{ m.result.value }}</td>
+                {% else %}
+                <td>{{ m.result.error }}</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+            {% else %}
+            No results
+            {% endif %}
+
+            </tbody>
+        </table>
+      </div>
+
+
+
 
     <div class="pagination">
     <span class="step-links">

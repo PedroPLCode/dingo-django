@@ -1,0 +1,10 @@
+{% extends "maths/main.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+{% load static %}
+<img src="{% static 'maths/img/logo.svg' %}">
+<h3>Hello {{ name|default:"world"|title }}!</h3>
+
+{% endblock %}

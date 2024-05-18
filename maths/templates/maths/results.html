@@ -3,11 +3,54 @@
 {% block title %}Maths list{% endblock %}
 
 {% block content %}
-   <ul>
-       {% for r in results %}
-           <li>{{ r }}</li>
-       {% endfor %}
-   </ul>
+
+<div class="table-responsive">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#id</th>
+          <th scope="col">result</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if results %}
+        {% for r in results %}
+          <tr>
+            <th scope="row">{{ r.id }}</a></th>
+            {% if r.value %}
+            <td>{{ r.value }}</td>
+            {% else %}
+            <td>{{ r.error }}</td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        {% else %}
+        No results
+        {% endif %}
+
+        </tbody>
+    </table>
+  </div>
+
+   <div class="pagination">
+    <span class="step-links">
+
+        {% if results.has_previous %}
+            <a href="?page=1">« first</a>
+            <a href="?page={{ results.previous_page_number }}">previous</a>
+        {% endif %}
+ 
+        <span class="current">
+            Page {{ results.number }} of {{ results.paginator.num_pages }}.
+        </span>
+ 
+        {% if results.has_next %}
+            <a href="?page={{ results.next_page_number }}">next</a>
+            <a href="?page={{ results.paginator.num_pages }}">last »</a>
+        {% endif %}
+
+    </span>
+    </div>
 
    <form method="post">
         {% csrf_token %}

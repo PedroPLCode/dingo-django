@@ -122,6 +122,8 @@ def math_details(request, id):
    
    
 def results_list(request):
+    page_number = request.GET.get('page')
+    
     if request.method == "POST":
         form = ResultForm(data=request.POST)
 
@@ -137,6 +139,8 @@ def results_list(request):
 
     form = ResultForm()
     results = Result.objects.all()
+    paginator = Paginator(results, 5)
+    results = paginator.get_page(page_number)
     return render(
         request=request,
         template_name="maths/results.html",

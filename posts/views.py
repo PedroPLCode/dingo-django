@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.contrib import messages
 from posts.models import Post, Author
 from posts.forms import AuthorForm, PostForm
 
 def posts_list(request):
+    page_number = request.GET.get('page')
+    post_filter = request.GET.get('filter')
+    
     if request.method == "POST":
         form = PostForm(data=request.POST)
 
@@ -17,13 +21,21 @@ def posts_list(request):
                 form.errors['__all__']
             )
             
-    posts = Post.objects.all()
     form = PostForm()
+    
+    if post_filter:
+        posts = Post.objects.filter(title__icontains=post_filter)
+    else:
+        posts = Post.objects.all()
+        
+    paginator = Paginator(posts, 5)
+    posts = paginator.get_page(page_number)
     return render(
         request=request,
         template_name="posts/list.html",
         context={"posts": posts,
                  "form": form,
+                 "post_filter": post_filter,
                 }
     )
 
@@ -47,6 +59,9 @@ def post_details(request, id):
    
 
 def authors_list(request):
+    page_number = request.GET.get('page')
+    author_filter = request.GET.get('filter')
+    
     if request.method == "POST":
         form = AuthorForm(request.POST)
         
@@ -64,11 +79,20 @@ def authors_list(request):
     else:
         form = AuthorForm()
 
-    authors = Author.objects.all()
+    if author_filter:
+        authors = Author.objects.filter(nick__icontains=author_filter)
+    else:
+        authors = Author.objects.all()
+        
+    paginator = Paginator(authors, 5)
+    authors = paginator.get_page(page_number)
     return render(
         request=request,
         template_name="posts/authors.html",
-        context={"authors": authors, "form": form}
+        context={"authors": authors,
+                 "form": form,
+                 "author_filter": author_filter,
+                 }
     )
 
 

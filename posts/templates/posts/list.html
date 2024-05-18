@@ -1,4 +1,4 @@
-{% extends "posts/main.html" %}
+{% extends "maths/main.html" %}
 
 {% block title %}Posts list{% endblock %}
 
@@ -6,11 +6,65 @@
 
     <h3>Posts list</h3>
 
-    <ul>
-        {% for post in posts %}
-            <li><a href="{% url 'posts:details' post.id %}">{{ post.title }}</a></li>
-        {% endfor %}
-    </ul>
+    <form method="get" action="{% url 'posts:list' %}">
+        <label for="filter">Filter posts:</label>
+        <input type="text" id="filter" name="filter" placeholder="filter posts">
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if post_filter %}
+    <h4>Filtered by query: {{ post_filter }}</h4>
+    {% else %}
+        <h4>All results</h4>
+    {% endif %}
+
+
+    <div class="table-responsive">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#id</th>
+              <th scope="col">title</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if posts %}
+            {% for post in posts %}
+              <tr>
+                <th scope="row">{{ post.id }}</a></th>
+                <td><a href="{% url 'posts:details' post.id %}">{{ post.title }}</a></td>
+              </tr>
+            {% endfor %}
+            {% else %}
+            No posts
+            {% endif %}
+    
+            </tbody>
+        </table>
+      </div>
+
+
+
+
+    <div class="pagination">
+        <span class="step-links">
+    
+            {% if posts.has_previous %}
+                <a href="?page=1">« first</a>
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+     
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+            </span>
+     
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">last »</a>
+            {% endif %}
+    
+        </span>
+    </div>
 
     <h2>Add new Post</h2>
     <form method="post" class="d-flex flex-column align-items-center justify-content-center">
