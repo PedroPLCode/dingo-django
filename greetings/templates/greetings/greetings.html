@@ -5,6 +5,15 @@
 {% block content %}
 {% load static %}
 <img src="{% static 'maths/img/logo.svg' %}">
-<h3>Hello {{ name|default:"world"|title }}!</h3>
+<h3 class="mt-3 text-center">Hello {{ name|default:"world"|title }}!</h3>
+
+<div class="mt-3 d-flex flex-column align-items-center justify-content-center">
+    <a href="/posts/list/">see all posts</a>
+    <a href="/posts/authors/">see all authors</a>
+    <a href="/maths/results/">se all maths results</a>
+    <a href="/maths/histories/">see all maths histories</a>
+    <a href="/greetings/about">about</a>
+    <a href="/greetings/contact">contact</a>
+</div>
 
 {% endblock %}

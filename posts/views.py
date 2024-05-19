@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib import messages
 from posts.models import Post, Author
@@ -110,7 +110,20 @@ def author_details(request, id):
     return render(
         request=request,
         template_name="posts/authordetails.html",
-        context={"author": author,
-                 "form": form,
+        context={"author": author, "form": form,
                 }
+    )
+    
+    
+def author_posts(request, nick):
+    page_number = request.GET.get('page')
+    author = get_object_or_404(Author, nick__icontains=nick)
+    posts = Post.objects.filter(author__nick__icontains=nick)
+    paginator = Paginator(posts, 5)
+    posts = paginator.get_page(page_number)
+    return render(
+        request=request,
+        template_name="posts/list.html",
+        context={"posts": posts, "author": author,
+        }
     )
