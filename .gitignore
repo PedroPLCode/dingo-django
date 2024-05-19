@@ -2,12 +2,12 @@
 *.log
 *.pot
 *.pyc
-__pycache__
-dingo/__pycache__
-maths/__pycache__
-posts/__pycache__
-greetings/__pycache__
-sessions/__pycache__
+__pycache__/
+dingo/__pycache__/
+maths/__pycache__/
+posts/__pycache__/
+greetings/__pycache__/
+sessions/__pycache__/
 db.sqlite3
 media
 
