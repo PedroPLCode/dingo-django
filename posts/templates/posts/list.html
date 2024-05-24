@@ -30,6 +30,7 @@
           <thead>
             <tr>
               <th scope="col">#id</th>
+              <th scope="col">#tags</th>
               <th scope="col">title</th>
               <th scope="col">author</th>
               <th scope="col">created</th>
@@ -40,6 +41,7 @@
             {% for post in posts %}
               <tr>
                 <th scope="row">{{ post.id }}</a></th>
+                <th scope="row"> {% for tag in post.tags.all %} #{{ tag.word }} {% endfor %} </a></th>
                 <td><a href="{% url 'posts:details' post.id %}">{{ post.title }}</a></td>
                 <td><a href="{% url 'posts:authordetails' post.author.id %}">{{ post.author.nick }}</a></td>
                 <td>{{ post.created }}</td>

@@ -18,10 +18,10 @@
 
    <div class="row">
        <div class="col-4"></div>
-       <form method="post" action="{% url 'login' %}" class="col-4">
+       <form method="post" action="{% url 'login' %}" class="col-4 d-flex flex-column align-items-center justify-content-center">
            {% csrf_token %}
            {% bootstrap_form form %}
-           <input class="button" type="submit" value="login"/>
+           <input class="btn btn-sm btn-primary" type="submit" value="login"/>
            <input type="hidden" name="next" value="{{ next }}"/>
        </form>
 

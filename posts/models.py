@@ -6,6 +6,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='photos/%Y/%m/%d', null=True, default='')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField("posts.Tag", related_name="posts")
     author = models.ForeignKey(
         'posts.Author',
         on_delete=models.CASCADE,
@@ -23,3 +24,11 @@ class Author(models.Model):
     
     def __str__(self):
         return (f"id:{self.id} {self.nick}")
+    
+    
+class Tag(models.Model):
+    word = models.CharField(max_length=50, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return (f"id:{self.id} #{self.word}")

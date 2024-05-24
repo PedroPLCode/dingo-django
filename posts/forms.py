@@ -5,7 +5,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = "__all__"
-        fields = ["title", "content", "author", "image"]
+        fields = ["title", "content", "author",  "tags", "image"]
         
     image = forms.ImageField(required=False)
 

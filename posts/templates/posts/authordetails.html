@@ -25,12 +25,14 @@
     </table>
     <a href="{% url 'posts:authors' %}">back</a>
 
-    <h4 class="mt-3">Edit Author</h4>
-    <form method="post" class="d-flex flex-column align-items-center justify-content-end">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-sm btn-primary" type="submit">save changes</button>
-    </form>
+    {% if perms.posts.add_post %}
+        <h4 class="mt-3">Edit Author</h4>
+        <form method="post" class="d-flex flex-column align-items-center justify-content-end">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-sm btn-primary" type="submit">save changes</button>
+        </form>
+    {% endif %}
     
 </div>
 
