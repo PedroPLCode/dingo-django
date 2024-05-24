@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import math, add, sub, mul, div, maths_list, math_details, results_list
 
 app_name="maths"

@@ -9,7 +9,7 @@ def posts_list(request):
     post_filter = request.GET.get('filter')
     
     if request.method == "POST":
-        form = PostForm(data=request.POST)
+        form = PostForm(data=request.POST, files=request.FILES)
 
         if form.is_valid():
             form.save()
@@ -44,7 +44,7 @@ def post_details(request, id):
     post = Post.objects.get(id=id)
     
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, files=request.FILES, instance=post)
         if form.is_valid():
             form.save()
             messages.success(request, "Post changed successfully")

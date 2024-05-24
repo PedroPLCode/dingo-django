@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from maths.models import Math, Result
 from maths.forms import ResultForm
@@ -92,6 +93,7 @@ def div(request, a, b):
 	)
     
 
+@login_required
 def maths_list(request):
     maths = Math.objects.all()
     page_number = request.GET.get('page')

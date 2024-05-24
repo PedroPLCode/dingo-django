@@ -47,6 +47,15 @@
                     </li>
                     <li><a class="navbar-brand" href="/greetings/about">About</a></li>
                     <li><a class="navbar-brand" href="/greetings/contact">Contact</a></li>
+                    <li>
+                        {% if user.is_authenticated %}
+                            <a class="navbar-brand">
+                                {{ user.username }} | <a class="navbar-brand" href="{% url 'logout' %}">logout</a>
+                            </a>
+                        {% else %}
+                           <a class="navbar-brand" href="{% url 'login' %}">login</a>
+                        {% endif %}
+                    </li>
                 </ul>
             </div>
             <ul class="navbar-nav mr-auto"></ul>

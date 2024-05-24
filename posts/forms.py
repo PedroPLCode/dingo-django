@@ -4,7 +4,10 @@ from posts.models import Author, Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'author']
+        fields = "__all__"
+        fields = ["title", "content", "author", "image"]
+        
+    image = forms.ImageField(required=False)
 
     def clean(self):
         cleaned_data = super().clean()
