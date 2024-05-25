@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib import messages
-from posts.models import Post, Author
+from posts.models import Post, Author, Tag
 from posts.forms import AuthorForm, PostForm
 
 def posts_list(request):
@@ -125,5 +125,19 @@ def author_posts(request, nick):
         request=request,
         template_name="posts/list.html",
         context={"posts": posts, "author": author,
+        }
+    )
+    
+    
+def posts_with_tag(request, tag):
+    page_number = request.GET.get('page')
+    tag = get_object_or_404(Tag, word=tag)
+    posts = Post.objects.filter(tags=tag)
+    paginator = Paginator(posts, 5)
+    posts = paginator.get_page(page_number)
+    return render(
+        request=request,
+        template_name="posts/list.html",
+        context={"posts": posts, "tag": tag,
         }
     )
