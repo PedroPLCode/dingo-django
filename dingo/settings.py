@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages', # czy to potrzebne ?
+    'bootstrap4',
+    #'breadcrumbs', # error
     'maths',
     'greetings',
     'posts',
-    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'breadcrumbs.middleware.BreadcrumbsMiddleware', # error
 ]
 
 ROOT_URLCONF = 'dingo.urls'
@@ -67,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request', # czy to potrzebne ?
             ],
         },
     },
@@ -81,7 +86,7 @@ WSGI_APPLICATION = 'dingo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),  # Konwersja obiektu Path na ciąg znaków
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
