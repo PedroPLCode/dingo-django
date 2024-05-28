@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+
+{% block title %}Posts list{% endblock %}
+
+{% block content %}
+
+<div class="mt-3 d-flex flex-column align-items-center justify-content-center">
+
+    <h3>{{ author.nick }}</h3>
+
+    <table>
+        <tr>
+            <th>Author ID</th>
+            <td>{{ author.id }}</td>
+        </tr>
+        <tr>
+            <th>Author Name</th>
+            <td>{{ author.name }}</td>
+        </tr>
+        <tr>
+            <th>Author Comment</th>
+            <td>{{ author.comment }}</td>
+        </tr>
+        <tr>
+            <th>Number of Books</th>
+            <td>{{ author_books|length }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="{% url 'books:author_books' author.name %}">Click to see this author's books</a>
+            </td>
+        </tr>
+    </table>
+    <a href="{% url 'books:authors_list' %}">Back</a>
+    
+</div>
+
+{% endblock %}

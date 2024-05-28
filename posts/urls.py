@@ -11,5 +11,4 @@ urlpatterns = [
    path('post/<int:id>', post_details, name="details"),
    path('authors/', authors_list, name="authors"),
    path('author/<int:id>', author_details, name="author"),
-   path('postslist/', ListView.as_view(model=Post), name="posts_list"), # testowo ale breadcrumbs nie dziala
 ]

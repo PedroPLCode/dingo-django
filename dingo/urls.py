@@ -21,12 +21,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('', include("greetings.urls")),
     path('maths/', include("maths.urls")),
     path('greetings/', include("greetings.urls")),
     path('sessions/', include("sessions.urls")),
     path('posts/', include("posts.urls")),
+    path('books/', include("books.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 

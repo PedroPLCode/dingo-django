@@ -1,3 +1,7 @@
+DODAĆ:
+- licznik postów autora,
+- breadcrumbs, settings.py
+
 # Dingo.py django practice
 
 ## Maths:

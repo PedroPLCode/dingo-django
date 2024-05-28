@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block content %}
+
+<div class="mt-3 d-flex flex-column align-items-center justify-content-center">
+    
+    <h3>{{ book.title }}</h3>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Title</th>
+            <td>{{ book.title }}</td>
+        </tr>
+        <tr>
+            <th>Comment</th>
+            <td>{{ book.comment }}</td>
+        </tr>
+        <tr>
+            <th>Tags</th>
+            <td>{% for tag in book.tags.all %} #{{ tag.word }} {% empty %}No tags{% endfor %}</td>
+        </tr>
+        <tr>
+            <th>Pages</th>
+            <td>{{ book.pages }}</td>
+        </tr>
+        <tr>
+            <th>Author ID</th>
+            <td>{{ book.author.id }}</td>
+        </tr>
+        <tr>
+            <th>Author Name</th>
+            <td><a href="{% url 'books:author_details' book.author.id %}">{{ book.author.name }}</a></td>
+        </tr>
+    </table>
+
+    {% if book.image.url != '' %}
+        <div>
+            <img class="img-fluid" style="max-width: 600px; max-height: 450px;" src="{{ book.image.url }}">
+        </div>
+    {% endif %}
+
+    <a href="{% url 'books:books_list' %}" class="btn btn-primary mt-3">Back</a>
+
+</div>
+
+{% endblock %}
