@@ -35,7 +35,13 @@
             <tr>
                 <th scope="row">{{ author.id }}</th>
                 <td><a href="{% url 'books:author_details' author.id %}">{{ author.name }}</a></td>
-                <td>{{ author.book_count }}</td>
+                <td>
+                    {% if author.book_count > 0 %}
+                        <a href="{% url 'books:author_books' author.name %}">{{ author.book_count }}</a>
+                    {% else %}
+                        {{ author.book_count }}
+                    {% endif %}
+                </td>
               </tr>
             {% endfor %}
           </tbody>

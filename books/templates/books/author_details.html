@@ -23,15 +23,67 @@
         </tr>
         <tr>
             <th>Number of Books</th>
-            <td>{{ author_books|length }}</td>
+            <td>{{ books|length }}</td>
         </tr>
-        <tr>
-            <td colspan="2">
-                <a href="{% url 'books:author_books' author.name %}">Click to see this author's books</a>
-            </td>
-        </tr>
+        {% if books|length > 0 %}
+        <div class="table-responsive">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#id</th>
+                        <th scope="col">#tags</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Pages</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <th scope="row">{{ book.id }}</th>
+                            <td>
+                                {% for tag in book.tags.all %}
+                                    <a href="{% url 'books:books_with_tag' tag.word %}">#{{ tag.word }}</a>
+                                {% endfor %}
+                            </td>
+                            <td><a href="{% url 'books:book_details' book.id %}">{{ book.title }}</a></td>
+                            <td><a href="{% url 'books:author_details' book.author.id %}">{{ book.author.name }}</a></td>
+                            <td>{{ book.pages }}</a></td>
+                            <td>
+                                {% if book.image.url != '' %}
+                                    <a href="{{ book.image.url }}">show</a>
+                                {% else %}
+                                    no image
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <h4>No books found</h4>
+        {% endif %}
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if books.has_previous %}
+                    <a href="?page=1">« first</a>
+                    <a href="?page={{ books.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ books.number }} of {{ books.paginator.num_pages }}.
+                </span>
+                {% if books.has_next %}
+                    <a href="?page={{ books.next_page_number }}">next</a>
+                    <a href="?page={{ books.paginator.num_pages }}">last »</a>
+                {% endif %}
+            </span>
+        </div>
+        
     </table>
-    <a href="{% url 'books:authors_list' %}">Back</a>
+    <a href="{% url 'books:authors_list' %}" class="btn btn-primary mt-3">Back to Authors List</a>
     
 </div>
 

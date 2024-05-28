@@ -19,15 +19,11 @@
         </tr>
         <tr>
             <th>Tags</th>
-            <td>{% for tag in book.tags.all %} #{{ tag.word }} {% empty %}No tags{% endfor %}</td>
+            <td>{% for tag in book.tags.all %} <a href="{% url 'books:books_with_tag' tag.word %}">#{{ tag.word }}</a> {% empty %}No tags{% endfor %}</td>
         </tr>
         <tr>
             <th>Pages</th>
             <td>{{ book.pages }}</td>
-        </tr>
-        <tr>
-            <th>Author ID</th>
-            <td>{{ book.author.id }}</td>
         </tr>
         <tr>
             <th>Author Name</th>
@@ -41,7 +37,7 @@
         </div>
     {% endif %}
 
-    <a href="{% url 'books:books_list' %}" class="btn btn-primary mt-3">Back</a>
+    <a href="{% url 'books:books_list' %}" class="btn btn-primary mt-3">Back to Books List</a>
 
 </div>
 

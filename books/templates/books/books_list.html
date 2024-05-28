@@ -33,6 +33,7 @@
                     <th scope="col">#tags</th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
+                    <th scope="col">Pages</th>
                     <th scope="col">Image</th>
                 </tr>
             </thead>
@@ -47,6 +48,7 @@
                         </td>
                         <td><a href="{% url 'books:book_details' book.id %}">{{ book.title }}</a></td>
                         <td><a href="{% url 'books:author_details' book.author.id %}">{{ book.author.name }}</a></td>
+                        <td>{{ book.pages }}</a></td>
                         <td>
                             {% if book.image.url != '' %}
                                 <a href="{{ book.image.url }}">show</a>

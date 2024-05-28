@@ -56,13 +56,18 @@ def authors_list(request):
 
 def author_details(request, id):
     author = Author.objects.get(id=id)
-    author_books = Book.objects.filter(author__name=author.name)
+    books = Book.objects.filter(author__name=author.name)
+
+    page_number = request.GET.get('page')
+    paginator = Paginator(books, 5)
+    books = paginator.get_page(page_number)
+
 
     return render(
         request=request,
         template_name="books/author_details.html",
         context={"author": author,
-                 "author_books": author_books,
+                 "books": books,
                  }
     )
     
