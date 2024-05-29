@@ -1,5 +1,5 @@
 from django.contrib import admin
-from books.models import Book, Author, Tag, Borrow
+from books.models import Book, Author, Tag, Borrow, Comment
 
 class BookAdmin(admin.ModelAdmin):
    list_display = ["id", "title", "comment", "author"]
@@ -25,3 +25,9 @@ class BorrowAdmin(admin.ModelAdmin):
    list_display = ['id', 'comment', 'book', 'user', 'borrow_date', 'return_date', 'is_returned']
    list_filter = ["book", "user"]
    search_fields = ["book", "user", "comment"]
+   
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+   list_display = ['id', 'author', 'comment']
+   list_filter = ["author", "comment"]
+   search_fields = ["comment"]

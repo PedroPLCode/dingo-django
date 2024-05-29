@@ -11,7 +11,7 @@
     <table>
         <tr>
             <th>Book</th>
-            <td>{{ borrow.book }}</td>
+            <td><a href="{% url 'books:book_details' borrow.book.id %}">{{ borrow.book.title }}</a></td>
         </tr>
         <tr>
             <th>Borrowed to</th>

@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.core.paginator import Paginator
-from django.contrib import messages
 from django.db.models import Count
-from books.models import Book, Author, Tag, Borrow
+from books.models import Book, Author, Tag, Borrow, Comment
 from django.contrib.auth.models import User
 
 def books_list(request):
@@ -30,6 +29,7 @@ def book_details(request, id):
     book = Book.objects.get(id=id)
     current_borrow = book.borrows.filter(is_returned=False).first()
     is_borrowed = current_borrow is not None
+    comments = Comment.objects.filter(book__id=id)
     
     if request.method == 'POST':
         if 'return_book' in request.POST:
@@ -51,13 +51,23 @@ def book_details(request, id):
                     borrow_date=timezone.now(),
                     is_returned=False
                 )
+        elif 'comment' in request.POST:
+            Comment.objects.create(
+                    book=book,
+                    author=request.user if request.user.is_authenticated else request.POST.get('author'),
+                    comment=request.POST.get('comment')
+                )
         
         return redirect('books:book_details', id=id)
 
     return render(
         request=request,
         template_name="books/book_details.html",
-        context={"book": book, "is_borrowed": is_borrowed, "current_borrow": current_borrow}
+        context={"book": book, 
+                 "comments": comments,
+                 "is_borrowed": is_borrowed, 
+                 "current_borrow": current_borrow
+                 }
     )
    
 

@@ -31,6 +31,21 @@
         </tr>
     </table>
 
+    {% if comments %}
+    <h4>Comments</h4>
+    {% for comment in comments %}
+    <p>{{ comment.comment }} - author: {{ comment.author }}</p>
+    {% endfor %}
+    {% endif %}
+
+    <form method="POST" class="float-right d-flex flex-column align-items-center justify-content-center">{% csrf_token %}
+        <input type="text" name="comment" placeholder="comment..">
+        {% if not request.user.is_authenticated %}
+        <input type="text" class="mt-1" name="author" placeholder="author..">
+        {% endif %}
+        <button class="btn btn-primary mt-1 mb-3">Add comment</button>
+    </form>
+
     {% if book.image.url != '' %}
         <div>
             <img class="img-fluid" style="max-width: 600px; max-height: 450px;" src="{{ book.image.url }}">
@@ -39,7 +54,7 @@
 
     {% if is_borrowed %}
     <div>
-        Książka jest wypożyczona
+        Książka jest niedostępna
     </div>
     {% if current_borrow and current_borrow.user == request.user %}
         <form method="POST" class="float-right">{% csrf_token %}

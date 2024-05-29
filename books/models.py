@@ -18,6 +18,22 @@ class Book(models.Model):
         return (f"id:{self.id} {self.title}")
 
 
+class Comment(models.Model):
+    author = models.CharField(max_length=30, null=False)
+    comment = models.TextField(null=False)
+    
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+        related_name='comments'
+    )
+
+    def __str__(self):
+        return f"id:{self.id} comment:{self.comment}"
+    
+
 class Author(models.Model):
     name = models.CharField(max_length=30, null=False, unique=True)
     comment = models.TextField(null=True)
