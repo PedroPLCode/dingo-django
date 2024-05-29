@@ -37,6 +37,30 @@
         </div>
     {% endif %}
 
+    {% if is_borrowed %}
+    <div>
+        Książka jest wypożyczona
+    </div>
+    {% if current_borrow and current_borrow.user == request.user %}
+        <form method="POST" class="float-right">{% csrf_token %}
+            <input type="hidden" name="return_book" value="{{ current_borrow.id }}">
+            <button class="btn btn-primary">Mark as Returned</button>
+        </form>
+    {% endif %}
+    {% else %}
+    <div>
+        Książka jest dostępna
+    </div>
+    {% if request.user.is_authenticated %}
+        <form method="POST" class="float-right">{% csrf_token %}
+            <input type="hidden" name="borrow_book" value="{{ book.id }}">
+            <button class="btn btn-primary">Borrow this Book</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to borrow this book.</p>
+    {% endif %}
+    {% endif %}
+
     <a href="{% url 'books:books_list' %}" class="btn btn-primary mt-3">Back to Books List</a>
 
 </div>

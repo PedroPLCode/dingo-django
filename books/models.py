@@ -43,13 +43,15 @@ class Borrow(models.Model):
         Book,
         on_delete=models.CASCADE,
         null=False,
-        blank=False
+        blank=False,
+        related_name='borrows'
     )
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         null=False,
-        blank=False
+        blank=False,
+        related_name='borrows',
     )
 
     def __str__(self):

@@ -1,0 +1,54 @@
+{% extends "main.html" %}
+
+{% block title %}Borrow details{% endblock %}
+
+{% block content %}
+
+<div class="mt-3 d-flex flex-column align-items-center justify-content-center">
+
+    <h3>Borrow details</h3>
+
+    <table>
+        <tr>
+            <th>Book</th>
+            <td>{{ borrow.book }}</td>
+        </tr>
+        <tr>
+            <th>Borrowed to</th>
+            <td>{{ borrow.user }}</td>
+        </tr>
+        <tr>
+            <th>borrow date</th>
+            <td>{{ borrow.borrow_date }}</td>
+        </tr>
+        <tr>
+            <th>Return date</th>
+            <td>{{ borrow.return_date }}</td> 
+        </tr>
+        <tr>
+            <th>Is returned?</th>
+            <td>{{ borrow.is_returned }}</td>
+        </tr>
+        <tr>
+            <th>Borrower Name</th>
+            <td>{{ borrow.user }}</td>
+        </tr>
+        <tr>
+            <th>Comment</th>
+            <td>{{ borrow.comment }}</td>
+        </tr>
+        
+    </table>
+
+    {% if request.user.is_authenticated and borrow.is_returned == False %}
+    <form method="POST" class="float-right">{% csrf_token %}
+        <input type="hidden" name="borrow_id" value="{{ borrow.id }}">
+        <button class="btn btn-success">Return this book</button>
+    </form>
+    {% endif %}
+
+    <a href="{% url 'books:borrows_list' user.username %}" class="btn btn-primary mt-3">Back to Borrows List</a>
+    
+</div>
+
+{% endblock %}

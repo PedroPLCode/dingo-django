@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.db.models import Count
-from books.models import Book, Author, Tag
+from books.models import Book, Author, Tag, Borrow
+from django.contrib.auth.models import User
 
 def books_list(request):
     page_number = request.GET.get('page')
@@ -26,11 +28,36 @@ def books_list(request):
 
 def book_details(request, id):
     book = Book.objects.get(id=id)
+    current_borrow = book.borrows.filter(is_returned=False).first()
+    is_borrowed = current_borrow is not None
+    
+    if request.method == 'POST':
+        if 'return_book' in request.POST:
+            borrow = get_object_or_404(Borrow, id=current_borrow.id)
+            borrow.is_returned = True
+            borrow.return_date = timezone.now()
+            borrow.save()
+        elif 'borrow_book' in request.POST:
+            try:
+                borrow = Borrow.objects.get(book__id=id)
+                borrow.is_returned = False
+                borrow.borrow_date = timezone.now()
+                borrow.user = request.user,
+                borrow.save()
+            except:
+                Borrow.objects.create(
+                    book=book,
+                    user=request.user,
+                    borrow_date=timezone.now(),
+                    is_returned=False
+                )
+        
+        return redirect('books:book_details', id=id)
 
     return render(
         request=request,
         template_name="books/book_details.html",
-        context={"book": book}
+        context={"book": book, "is_borrowed": is_borrowed, "current_borrow": current_borrow}
     )
    
 
@@ -97,4 +124,43 @@ def books_with_tag(request, tag):
         template_name="books/books_list.html",
         context={"books": books, "tag": tag,
         }
+    )
+     
+    
+def borrows_list(request, username):
+    page_number = request.GET.get('page')
+    user = get_object_or_404(User, username=username)
+    borrows_to_return = Borrow.objects.filter(user=user, is_returned=False)
+    paginator = Paginator(borrows_to_return, 5)
+    borrows_to_return = paginator.get_page(page_number)
+    
+    borrows_returned = Borrow.objects.filter(user=user, is_returned=True)
+    paginator = Paginator(borrows_returned, 5)
+    borrows_returned = paginator.get_page(page_number)
+    
+    return render(
+        request=request,
+        template_name="books/borrows_list.html",
+        context={"borrows_to_return": borrows_to_return,
+                 "borrows_returned": borrows_returned,
+                 "user": user,
+                 }
+    )
+
+
+def borrow_details(request, id):
+    borrow = get_object_or_404(Borrow, id=id)
+
+    if request.method == 'POST' and 'borrow_id' in request.POST:
+        borrow = Borrow.objects.get(id=request.POST['borrow_id'])
+        borrow.is_returned = True
+        borrow.return_date = timezone.now()
+        borrow.save()
+        return redirect('books:borrow_details', id=id)
+    
+    return render(
+        request=request,
+        template_name="books/borrow_details.html",
+        context={"borrow": borrow,
+                 }
     )

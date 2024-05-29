@@ -15,6 +15,9 @@
     <div class="mb-3 d-flex flex-column align-items-center justify-content-center">
         <a href="/books/books/">see all books</a>
         <a href="/books/authors/">see all books authors</a>
+        {% if user.is_authenticated %}
+        <a href="/books/borrows/{{ user.username }}">see borrows</a>
+        {% endif %}
     </div>
     <div class="mb-3 d-flex flex-column align-items-center justify-content-center">
         <a href="/maths/results/">se all maths results</a>

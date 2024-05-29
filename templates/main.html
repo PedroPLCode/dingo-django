@@ -53,6 +53,9 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/books/books/">Books</a>
                                 <a class="dropdown-item" href="/books/authors/">Authors</a>
+                                {% if user.is_authenticated %}
+                                <a class="dropdown-item" href="/books/borrows/{{ user.username }}">My Borrows</a>
+                                {% endif %}
                             </div>
                         </div>
                     </li>
