@@ -35,6 +35,7 @@
                     <th scope="col">Author</th>
                     <th scope="col">Pages</th>
                     <th scope="col">Image</th>
+                    <th scope="col">Borrowed?</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,6 +55,21 @@
                                 <a href="{{ book.image.url }}">show</a>
                             {% else %}
                                 no image
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if book.borrows.exists %}
+                                {% for borrow in book.borrows.all %}
+                                    {% if not borrow.is_returned %}
+                                        {% if request.user.is_authenticated %}
+                                            <a href="{% url 'books:borrow_details' borrow.id %}">Yes - See details</a>
+                                        {% else %}
+                                            <p>Yes</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <p>No</p>
                             {% endif %}
                         </td>
                     </tr>

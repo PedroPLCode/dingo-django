@@ -41,10 +41,14 @@
     </table>
 
     {% if request.user.is_authenticated and borrow.is_returned == False %}
-    <form method="POST" class="float-right">{% csrf_token %}
-        <input type="hidden" name="borrow_id" value="{{ borrow.id }}">
-        <button class="btn btn-success">Return this book</button>
-    </form>
+        {% if request.user == borrow.user %}
+            <form method="POST" class="float-right">{% csrf_token %}
+                <input type="hidden" name="borrow_id" value="{{ borrow.id }}">
+                <button class="btn btn-success">Return this book</button>
+            </form>
+        {% else %}
+            Borrowed to {{ borrow.user }}
+        {% endif %}
     {% endif %}
 
     <a href="{% url 'books:borrows_list' user.username %}" class="btn btn-primary mt-3">Back to Borrows List</a>
