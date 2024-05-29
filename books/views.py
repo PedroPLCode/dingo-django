@@ -16,6 +16,7 @@ def books_list(request):
         
     paginator = Paginator(books, 5)
     books = paginator.get_page(page_number)
+    
     return render(
         request=request,
         template_name="books/books_list.html",
@@ -27,9 +28,9 @@ def books_list(request):
 
 def book_details(request, id):
     book = Book.objects.get(id=id)
+    comments = Comment.objects.filter(book__id=id)
     current_borrow = book.borrows.filter(is_returned=False).first()
     is_borrowed = current_borrow is not None
-    comments = Comment.objects.filter(book__id=id)
     
     if request.method == 'POST':
         if 'return_book' in request.POST:
@@ -57,7 +58,6 @@ def book_details(request, id):
                     author=request.user if request.user.is_authenticated else request.POST.get('author'),
                     comment=request.POST.get('comment')
                 )
-        
         return redirect('books:book_details', id=id)
 
     return render(
@@ -82,6 +82,7 @@ def authors_list(request):
         
     paginator = Paginator(authors, 5)
     authors = paginator.get_page(page_number)
+    
     return render(
         request=request,
         template_name="books/authors_list.html",
@@ -92,13 +93,11 @@ def authors_list(request):
 
 
 def author_details(request, id):
+    page_number = request.GET.get('page')
     author = Author.objects.get(id=id)
     books = Book.objects.filter(author__name=author.name)
-
-    page_number = request.GET.get('page')
     paginator = Paginator(books, 5)
     books = paginator.get_page(page_number)
-
 
     return render(
         request=request,
@@ -115,6 +114,7 @@ def author_books(request, name):
     books = Book.objects.filter(author__name__icontains=name)
     paginator = Paginator(books, 5)
     books = paginator.get_page(page_number)
+    
     return render(
         request=request,
         template_name="books/books_list.html",
@@ -129,6 +129,7 @@ def books_with_tag(request, tag):
     books = Book.objects.filter(tags=tag)
     paginator = Paginator(books, 5)
     books = paginator.get_page(page_number)
+    
     return render(
         request=request,
         template_name="books/books_list.html",
@@ -140,6 +141,7 @@ def books_with_tag(request, tag):
 def borrows_list(request, username):
     page_number = request.GET.get('page')
     user = get_object_or_404(User, username=username)
+    
     borrows_to_return = Borrow.objects.filter(user=user, is_returned=False)
     paginator = Paginator(borrows_to_return, 5)
     borrows_to_return = paginator.get_page(page_number)

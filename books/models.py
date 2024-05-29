@@ -21,7 +21,6 @@ class Book(models.Model):
 class Comment(models.Model):
     author = models.CharField(max_length=30, null=False)
     comment = models.TextField(null=False)
-    
     book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
@@ -54,7 +53,6 @@ class Borrow(models.Model):
     return_date = models.DateTimeField(null=True)
     is_returned = models.BooleanField(default=False)
     comment = models.TextField(null=True)
-    
     book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,

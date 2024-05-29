@@ -1,5 +1,14 @@
 from django.urls import path
-from .views import books_list, book_details, authors_list, author_details, author_books, books_with_tag, borrows_list, borrow_details
+from .views import (
+    author_books,
+    author_details,
+    authors_list,
+    book_details,
+    books_list,
+    books_with_tag,
+    borrow_details,
+    borrows_list
+)
 
 app_name="books"
 urlpatterns = [
