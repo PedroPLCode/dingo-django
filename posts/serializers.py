@@ -7,12 +7,12 @@ class PostSerializer(serializers.ModelSerializer):
        model = Post
        fields = ('id', 'title', 'content', 'created', 'modified', 'author', 'image', 'tags')
 
-class AuthorSerializer(serializers.ModelSerializer):
+class PostAuthorSerializer(serializers.ModelSerializer):
    class Meta:
        model = Author
        fields = ('id', 'nick', 'email')
 
-class TagSerializer(serializers.ModelSerializer):
+class PostTagSerializer(serializers.ModelSerializer):
    class Meta:
        model = Tag
        fields = ('id', 'word', 'created')

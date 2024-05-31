@@ -1,12 +1,12 @@
 from rest_framework.viewsets import ModelViewSet
 
 from posts.models import Post, Author
-from posts.serializers import PostSerializer, AuthorSerializer
+from posts.serializers import PostSerializer, PostAuthorSerializer
 
-class PostViewset(ModelViewSet):
+class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     
-class AuthorViewset(ModelViewSet):
+class PostAuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
+    serializer_class = PostAuthorSerializer
