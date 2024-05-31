@@ -1,5 +1,8 @@
 # Dingo.py django practice
 
+## /posts_api/v1/
+## /books_api/v1/
+
 ## Maths:
 
 ```shell
