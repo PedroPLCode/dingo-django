@@ -1,5 +1,7 @@
 # Dingo.py django practice
 
+[Live link to Replit](https://8ea9a1e5-9a55-47e6-a1f3-c9632a002dc8-00-1udg219vet2qx.spock.replit.dev/)
+
 ## /posts_api/v1/
 ## /books_api/v1/
 
